@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>JEREMY DIGITAL JOURNAL</title>
+
+<style>
+
+/* =========================================================
+   CURSOR PERSONALIZADO
+========================================================= */
+* {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="%2300E5FF"><polygon points="0,0 24,12 12,14 14,24 9,24 7,14 0,19"/></svg>'), auto !important;
+}
+
+/* =========================================================
+   FUENTES
+========================================================= */
+
+@font-face{
+
+    font-family:'Gunship';
+
+    src:url('GUNSHIP2.TTF')
+    format('truetype');
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    user-select:none;
+}
+
+html,body{
+
+    width:100%;
+    height:100%;
+    overflow:hidden;
+
+    background:#000814;
+
+    font-family:
+    'Courier New',
+    monospace;
+}
+
+/* =========================================================
+   FONDO
+========================================================= */
+
+body{
+
+    background:
+    radial-gradient(
+    circle at center,
+    #002255 0%,
+    #000814 70%);
+}
+
+/* =========================================================
+   TERMINALES
+========================================================= */
+
+#scene{
+
+    position:fixed;
+    inset:0;
+
+    overflow:hidden;
+    perspective:1000px;
+}
+
+.terminal{
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    border:1px solid
+    rgba(0,229,255,.45);
+
+    background:
+    linear-gradient(
+    180deg,
+    rgba(0,229,255,.05),
+    rgba(0,229,255,.01)
+    );
+
+    color:#00E5FF;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:13px;
+
+    line-height:18px;
+
+    text-align:center;
+
+    opacity:0;
+
+    box-shadow:
+    0 0 20px rgba(0,229,255,.15);
+}
+
+/* =========================================================
+   LOGO XANA
+========================================================= */
+
+.center{
+
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:100;
+}
+
+.logo{
+
+    width:220px;
+
+    animation:
+    floatLogo 5s ease-in-out infinite,
+    pulseLogo 2s ease-in-out infinite;
+
+    filter:
+    drop-shadow(0 0 20px #00E5FF)
+    drop-shadow(0 0 60px rgba(0,229,255,.4));
+}
+
+.logo:hover{
+
+    transform:scale(1.06);
+}
+
+@keyframes floatLogo{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+@keyframes pulseLogo{
+
+    0%,100%{
+
+        filter:
+        drop-shadow(0 0 20px #00E5FF)
+        drop-shadow(0 0 60px rgba(0,229,255,.4));
+    }
+
+    50%{
+
+        filter:
+        drop-shadow(0 0 45px #00E5FF)
+        drop-shadow(0 0 120px rgba(0,229,255,.9));
+    }
+}
+
+/* =========================================================
+   ZOOM XANA
+========================================================= */
+
+.zoomOut{
+
+    animation:
+    xanaZoom 2s cubic-bezier(.15,.7,0,1)
+    forwards;
+}
+
+@keyframes xanaZoom{
+
+    0%{
+
+        transform:scale(1);
+        opacity:1;
+    }
+
+    100%{
+
+        transform:scale(25);
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   VENTANA
+========================================================= */
+
+#journalWindow{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    width:1000px;
+    height:680px;
+
+    transform:
+    translate(-50%,-50%)
+    scale(.3);
+
+    opacity:0;
+
+    background:
+    linear-gradient(
+    180deg,
+    #123d70,
+    #08172e
+    );
+
+    border:2px solid #7feeff;
+
+    box-shadow:
+    0 0 45px rgba(0,229,255,.5);
+
+    overflow-y:auto;
+
+    z-index:200;
+
+    pointer-events:none;
+}
+
+/* =========================================================
+   ANIMACION LIBRO DIGITAL
+========================================================= */
+
+.bookOpen{
+
+    animation:
+    digitalBook 1.7s
+    cubic-bezier(.15,.8,.1,1)
+    forwards;
+}
+
+@keyframes digitalBook{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+        translate(-50%,-50%)
+        perspective(1400px)
+        rotateY(-90deg)
+        scale(.1);
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:
+        translate(-50%,-50%)
+        perspective(1400px)
+        rotateY(10deg)
+        scale(1.05);
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+        translate(-50%,-50%)
+        perspective(1400px)
+        rotateY(0deg)
+        scale(1);
+    }
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.window-header{
+
+    height:40px;
+
+    background:
+    linear-gradient(
+    90deg,
+    #35a8ff,
+    #7feeff);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-bottom:
+    2px solid #7feeff;
+
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+/* =========================================================
+   TITULO LOGO CD
+========================================================= */
+
+.window-title{
+
+    font-family:'Gunship';
+
+    letter-spacing:4px;
+
+    color:white;
+
+    font-size:15px;
+
+    text-shadow:
+    0 0 15px rgba(255,255,255,.8);
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+/* =========================================================
+   CD LOGO
+========================================================= */
+
+.logo-cd{
+
+    width:32px;
+    height:32px;
+
+    border-radius:50%;
+
+    position:relative;
+
+    background:
+    radial-gradient(
+    circle,
+    #ffffff 0%,
+    #9ce8ff 18%,
+    #31b4ff 55%,
+    #003b7a 100%
+    );
+
+    border:2px solid white;
+
+    animation:
+    spinCD 6s linear infinite;
+}
+
+.logo-cd::after{
+
+    content:'';
+
+    position:absolute;
+
+    width:7px;
+    height:7px;
+
+    background:white;
+
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%);
+}
+
+@keyframes spinCD{
+
+    from{
+
+        transform:rotate(0deg);
+    }
+
+    to{
+
+        transform:rotate(360deg);
+    }
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.window-content{
+
+    padding:40px;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.journal-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:50px 45px;
+
+    justify-items:center;
+}
+
+/* =========================================================
+   ITEM
+========================================================= */
+
+.journal-item{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    gap:18px;
+
+    opacity:0;
+
+    transform:
+    scale(.2)
+    rotateY(180deg);
+}
+
+/* =========================================================
+   SISTEMA DE BLOQUEO
+========================================================= */
+
+.journal-item.locked {
+    filter: grayscale(100%) brightness(0.4);
+}
+
+.journal-item.locked .journal-rhombus {
+    border-color: #ff0000;
+    box-shadow: 0 0 20px rgba(255,0,0,0.5);
+    background: #330000;
+    animation: none;
+}
+
+.journal-item.locked:hover .journal-rhombus {
+    transform: rotate(45deg) scale(1);
+    box-shadow: 0 0 30px rgba(255,0,0,0.8);
+    border-color: #ff6666;
+}
+
+/* =========================================================
+   ENTRADA CAPS
+========================================================= */
+
+.journal-item.show{
+
+    animation:
+    iconIntro 1.2s
+    cubic-bezier(.15,.8,.1,1)
+    forwards;
+}
+
+@keyframes iconIntro{
+
+    0%{
+
+        opacity:0;
+
+        transform:
+        scale(.1)
+        rotateY(720deg);
+    }
+
+    60%{
+
+        opacity:1;
+
+        transform:
+        scale(1.15)
+        rotateY(0deg);
+    }
+
+    100%{
+
+        opacity:1;
+
+        transform:
+        scale(1)
+        rotateY(0deg);
+    }
+}
+
+/* =========================================================
+   ROMBO
+========================================================= */
+
+.journal-rhombus{
+
+    width:88px;
+    height:88px;
+
+    transform:rotate(45deg);
+
+    position:relative;
+
+    background:
+    linear-gradient(
+    145deg,
+    #0b4d88,
+    #1f8be0
+    );
+
+    border:3px solid #9fe7ff;
+
+    transition:
+    transform .3s,
+    background .3s,
+    box-shadow .3s;
+
+    box-shadow:
+    0 0 20px rgba(82,225,242,.7),
+    inset 0 0 12px rgba(255,255,255,.3);
+
+    animation:
+    floatRhombus 4s ease-in-out infinite;
+}
+
+@keyframes floatRhombus{
+
+    0%{
+
+        transform:
+        rotate(45deg)
+        translateY(0px);
+    }
+
+    50%{
+
+        transform:
+        rotate(45deg)
+        translateY(-10px);
+    }
+
+    100%{
+
+        transform:
+        rotate(45deg)
+        translateY(0px);
+    }
+}
+
+/* =========================================================
+   HOVER NARANJA
+========================================================= */
+
+.journal-item:not(.locked):hover .journal-rhombus{
+
+    background:
+    linear-gradient(
+    145deg,
+    #ffb300,
+    #ff5e00
+    );
+
+    border-color:#ffe2a8;
+
+    transform:
+    rotate(45deg)
+    scale(1.1);
+
+    box-shadow:
+    0 0 40px rgba(255,140,0,1),
+    inset 0 0 18px rgba(255,255,255,.8);
+}
+
+/* =========================================================
+   CAP SELECCIONADO
+========================================================= */
+
+.journal-rhombus.active{
+
+    background:
+    linear-gradient(
+    145deg,
+    #ffb300,
+    #ff5e00
+    );
+
+    border-color:#fff0c2;
+
+    box-shadow:
+    0 0 55px rgba(255,140,0,1);
+
+    animation:
+    activePulse .8s ease infinite alternate;
+}
+
+@keyframes activePulse{
+
+    from{
+
+        box-shadow:
+        0 0 30px rgba(255,140,0,.6);
+    }
+
+    to{
+
+        box-shadow:
+        0 0 60px rgba(255,140,0,1);
+    }
+}
+
+/* =========================================================
+   CD ICON
+========================================================= */
+
+.cd-center{
+
+    position:absolute;
+
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%)
+    rotate(-45deg);
+
+    background:
+    radial-gradient(
+    circle,
+    #ffffff 0%,
+    #c7f4ff 20%,
+    #3ab5ff 60%,
+    #003c7a 100%
+    );
+
+    border:2px solid rgba(255,255,255,.9);
+
+    animation:
+    spinMiniCD 5s linear infinite;
+}
+
+@keyframes spinMiniCD{
+
+    from{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(0deg);
+    }
+
+    to{
+
+        transform:
+        translate(-50%,-50%)
+        rotate(360deg);
+    }
+}
+
+.cd-center::after{
+
+    content:'';
+
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    background:white;
+
+    border-radius:50%;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%);
+}
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.journal-label{
+
+    color:white;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    font-size:11px;
+
+    text-align:center;
+
+    width:170px;
+
+    text-shadow:
+    0 0 10px rgba(0,229,255,.8);
+}
+
+/* =========================================================
+   PLAYER Y CONTROLES SUPERIORES
+========================================================= */
+
+#player{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,.9);
+
+    display:none;
+
+    justify-content:center;
+    align-items:center;
+
+    z-index:999;
+}
+
+.player-box{
+
+    width:900px;
+    height:520px;
+
+    background:#071b34;
+
+    border:2px solid #7feeff;
+
+    box-shadow:
+    0 0 45px rgba(0,229,255,.5);
+
+    overflow:hidden;
+
+    animation:
+    playerOpen .7s ease;
+}
+
+@keyframes playerOpen{
+
+    from{
+
+        transform:
+        scale(.5);
+
+        opacity:0;
+    }
+
+    to{
+
+        transform:
+        scale(1);
+
+        opacity:1;
+    }
+}
+
+.player-header{
+    height:50px;
+    background: linear-gradient(90deg, #35a8ff, #7feeff);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 15px;
+    color:white;
+    font-family:'Gunship', sans-serif;
+}
+
+.player-controls-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.format-btn, .ratio-btn {
+    background: #003b7a;
+    color: #7feeff;
+    border: 1px solid #7feeff;
+    padding: 5px 10px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.format-btn:hover, .ratio-btn:hover, .format-btn.active, .ratio-btn.active {
+    background: #35a8ff;
+    color: white;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+.closePlayer{
+
+    font-size:20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* RESOLUCIONES */
+.ratio-normal {
+    width:100%;
+    height:calc(100% - 50px);
+    object-fit:contain;
+    background:black;
+}
+.ratio-4-3 {
+    width: auto !important;
+    height: calc(100% - 50px) !important;
+    aspect-ratio: 4 / 3;
+    object-fit: fill;
+    margin: 0 auto;
+    display: block;
+    background:black;
+}
+.ratio-16-9 {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+    object-fit: fill;
+    margin: auto;
+    display: block;
+    background:black;
+}
+
+/* =========================================================
+   PANTALLA DE ERROR ANOMALIA
+========================================================= */
+
+#errorScreen {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+#errorScreen img {
+    max-width: 10%;
+    max-height: 10%;
+    animation: errorGlitch 3.2s infinite;
+}
+
+@keyframes errorGlitch {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(5deg); }
+    40% { transform: skew(-5deg); }
+    100% { transform: skew(0deg); }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio id="bgAudio" src="sonidofondo.mp3" loop></audio>
+<div id="errorScreen">
+    <img src="XANA.webp" alt="Acceso Denegado">
+</div>
+
+<div id="scene"></div>
+
+<div class="center">
+
+<img
+src="XANA.webp"
+class="logo"
+id="logo">
+
+</div>
+
+<div id="journalWindow">
+
+<div class="window-header">
+
+<div class="window-title">
+
+<div class="logo-cd"></div>
+
+JEREMY BELPOIS \ DIARIO 
+
+</div>
+
+</div>
+
+<div class="window-content">
+
+<div
+class="journal-grid"
+id="journalGrid">
+
+</div>
+
+</div>
+
+</div>
+
+<div id="player">
+
+<div class="player-box" id="playerBox">
+
+<div class="player-header">
+
+<span id="playerTitle" style="font-size: 12px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 250px;">
+EPISODIO
+</span>
+
+<div class="player-controls-container">
+    <div id="formatSelector" style="display:flex; gap:5px;"></div>
+    <div style="width: 2px; height: 20px; background: #7feeff; margin: 0 5px;"></div>
+    <div style="display:flex; gap:5px;">
+        <button class="ratio-btn active" onclick="setAspectRatio('normal', this)">NORMAL</button>
+        <button class="ratio-btn" onclick="setAspectRatio('4:3', this)">4:3</button>
+        <button class="ratio-btn" onclick="setAspectRatio('16:9', this)">16:9</button>
+    </div>
+    <div style="width: 2px; height: 20px; background: #7feeff; margin: 0 5px;"></div>
+    <button class="ratio-btn" onclick="toggleFullscreen()">[ ]</button>
+    
+    <div
+    class="closePlayer"
+    onclick="closePlayer()">
+    ✕
+    </div>
+</div>
+
+</div>
+
+<video
+id="videoPlayer"
+class="ratio-normal"
+controls>
+
+</video>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================================================
+   SÍNTESIS DE SONIDOS VÍA WEB AUDIO API (NO REQUIEREN MP3)
+========================================================= */
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioContext();
+
+function playSynth(type, freq, duration) {
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    osc.start();
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+    osc.stop(audioCtx.currentTime + duration);
+}
+
+function soundXanaChill() {
+    playSynth('sine', 350, 1.5);
+    setTimeout(() => playSynth('triangle', 550, 2), 200);
+}
+
+function soundComputerOpen() {
+    playSynth('square', 800, 0.1);
+    setTimeout(() => playSynth('sine', 1200, 0.4), 100);
+    setTimeout(() => playSynth('sine', 1600, 0.6), 250);
+}
+
+function soundErrorXana() {
+    playSynth('sawtooth', 150, 0.4);
+    setTimeout(() => playSynth('sawtooth', 100, 0.4), 150);
+    setTimeout(() => playSynth('sawtooth', 50, 0.8), 300);
+}
+
+/* =========================================================
+   TERMINALES
+========================================================= */
+
+const TOTAL = 70;
+
+const scene =
+document.getElementById("scene");
+
+const terminals = [];
+
+for(let i=0;i<TOTAL;i++){
+
+    const t =
+    document.createElement("div");
+
+    t.className =
+    "terminal";
+
+    t.innerHTML =
+    "1111111111111111111<br>0000000000000000000<br>0011111111111111111";
+
+
+    const x =
+    (Math.random()-0.5)
+    *5000;
+
+    const y =
+    (Math.random()-0.5)
+    *3000;
+
+    const z =
+    Math.random()*5000+200;
+
+    terminals.push({
+        el:t,x,y,z
+    });
+
+    scene.appendChild(t);
+}
+
+const cx =
+window.innerWidth/2;
+
+const cy =
+window.innerHeight/2;
+
+function animate(){
+
+    for(let t of terminals){
+
+        t.z -= 18;
+
+        if(t.z < 150){
+
+            t.z = 5200;
+
+            t.x =
+            (Math.random()-0.5)
+            *5000;
+
+            t.y =
+            (Math.random()-0.5)
+            *3000;
+        }
+
+        const scale =
+        1000 / t.z;
+
+        const sx =
+        cx + (t.x*scale);
+
+        const sy =
+        cy + (t.y*scale);
+
+        t.el.style.opacity =
+        scale*2;
+
+        t.el.style.transform =
+        `translate3d(${sx}px,
+        ${sy}px,0)
+        scale(${scale})`;
+    }
+
+    requestAnimationFrame(
+    animate);
+}
+
+animate();
+
+/* =========================================================
+   XANA
+========================================================= */
+
+const logo =
+document.getElementById("logo");
+
+const journal =
+document.getElementById(
+"journalWindow");
+
+const bgAudio = document.getElementById("bgAudio");
+
+logo.addEventListener(
+"click",()=>{
+    
+    // Iniciar audios
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    soundXanaChill();
+    
+    bgAudio.volume = 0.5;
+    bgAudio.play().catch(e => console.log("Fondo sin cargar aún"));
+
+    logo.classList.add(
+    "zoomOut");
+
+    setTimeout(()=>{
+
+        logo.style.display =
+        "none";
+
+        journal.style.pointerEvents =
+        "auto";
+
+        journal.classList.add(
+        "bookOpen");
+        
+        soundComputerOpen();
+
+        loadEpisodes();
+
+    },1200);
+
+});
+
+/* =========================================================
+   PLAYER & ASPECT RATIO & FULLSCREEN
+========================================================= */
+
+const player =
+document.getElementById(
+"player");
+
+const video =
+document.getElementById(
+"videoPlayer");
+
+const playerTitle =
+document.getElementById(
+"playerTitle");
+
+function setAspectRatio(mode, btnElement) {
+    document.querySelectorAll('.ratio-btn').forEach(b => b.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    video.className = ''; 
+    if (mode === '4:3') {
+        video.classList.add('ratio-4-3');
+    } else if (mode === '16:9') {
+        video.classList.add('ratio-16-9');
+    } else {
+        video.classList.add('ratio-normal');
+    }
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.webkitRequestFullscreen) { /* Safari */
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { /* IE11 */
+            video.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+/* =========================================================
+   EPISODIOS BRUTOS Y ORDENAMIENTO (AGRUPANDO FORMATOS)
+========================================================= */
+
+const rawEpisodes = [
+    {
+        "id": "T1.E00",
+        "title": "El despertar de XANA",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E00%20-%20El%20despertar%20de%20XANA.mkv"
+    },
+    {
+        "id": "T1.E00",
+        "title": "El despertar de XANA",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E00%20-%20El%20despertar%20de%20XANA.mp4"
+    },
+    {
+        "id": "T1.E01",
+        "title": "Osito Godzilla",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E01%20-%20Osito%20Godzilla.mkv"
+    },
+    {
+        "id": "T1.E01",
+        "title": "Osito Godzilla",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E01%20-%20Osito%20Godzilla.mp4"
+    },
+    {
+        "id": "T1.E02",
+        "title": "Ver es creer",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E02%20-%20Ver%20es%20creer.mkv"
+    },
+    {
+        "id": "T1.E02",
+        "title": "Ver es creer",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E02%20-%20Ver%20es%20creer.mp4"
+    },
+    {
+        "id": "T1.E03",
+        "title": "Vacaciones en la niebla",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E03%20-%20Vacaciones%20en%20la%20niebla.mkv"
+    },
+    {
+        "id": "T1.E03",
+        "title": "Vacaciones en la niebla",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E03%20-%20Vacaciones%20en%20la%20niebla.mp4"
+    },
+    {
+        "id": "T1.E04",
+        "title": "Diario de a bordo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E04%20-%20Diario%20de%20a%20bordo.mkv"
+    },
+    {
+        "id": "T1.E04",
+        "title": "Diario de a bordo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E04%20-%20Diario%20de%20a%20bordo.mp4"
+    },
+    {
+        "id": "T1.E05",
+        "title": "Un virus muy gordo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E05%20-%20Un%20virus%20muy%20gordo.mkv"
+    },
+    {
+        "id": "T1.E05",
+        "title": "Un virus muy gordo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E05%20-%20Un%20virus%20muy%20gordo.mp4"
+    },
+    {
+        "id": "T1.E06",
+        "title": "Cruel dilema",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E06%20-%20Cruel%20dilema.mkv"
+    },
+    {
+        "id": "T1.E06",
+        "title": "Cruel dilema",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E06%20-%20Cruel%20dilema.mp4"
+    },
+    {
+        "id": "T1.E07",
+        "title": "Un problema de imagen",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E07%20-%20Un%20problema%20de%20imagen.mkv"
+    },
+    {
+        "id": "T1.E07",
+        "title": "Un problema de imagen",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E07%20-%20Un%20problema%20de%20imagen.mp4"
+    },
+    {
+        "id": "T1.E08",
+        "title": "Toma final",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E08%20-%20Toma%20final.mkv"
+    },
+    {
+        "id": "T1.E08",
+        "title": "Toma final",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E08%20-%20Toma%20final.mp4"
+    },
+    {
+        "id": "T1.E09",
+        "title": "Satelite",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E09%20-%20Satelite.mkv"
+    },
+    {
+        "id": "T1.E09",
+        "title": "Satelite",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E09%20-%20Satelite.mp4"
+    },
+    {
+        "id": "T1.E10",
+        "title": "Una criatura de ensueño",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E10%20-%20Una%20criatura%20de%20ensue%C3%B1o.mkv"
+    },
+    {
+        "id": "T1.E10",
+        "title": "Una criatura de ensueño",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E10%20-%20Una%20criatura%20de%20ensue%C3%B1o.mp4"
+    },
+    {
+        "id": "T1.E11",
+        "title": "La plaga",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E11%20-%20La%20plaga.mkv"
+    },
+    {
+        "id": "T1.E11",
+        "title": "La plaga",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E11%20-%20La%20plaga.mp4"
+    },
+    {
+        "id": "T1.E12",
+        "title": "Avispas al ataque",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E12%20-%20Avispas%20al%20ataque.mkv"
+    },
+    {
+        "id": "T1.E12",
+        "title": "Avispas al ataque",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E12%20-%20Avispas%20al%20ataque.mp4"
+    },
+    {
+        "id": "T1.E13",
+        "title": "Justo a tiempo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E13%20-%20Justo%20a%20tiempo.mkv"
+    },
+    {
+        "id": "T1.E13",
+        "title": "Justo a tiempo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E13%20-%20Justo%20a%20tiempo.mp4"
+    },
+    {
+        "id": "T1.E14",
+        "title": "La trampa",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E14%20-%20La%20trampa.mkv"
+    },
+    {
+        "id": "T1.E14",
+        "title": "La trampa",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E14%20-%20La%20trampa.mp4"
+    },
+    {
+        "id": "T1.E15",
+        "title": "Atuendo de risa",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E15%20-%20Atuendo%20de%20risa.mkv"
+    },
+    {
+        "id": "T1.E15",
+        "title": "Atuendo de risa",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E15%20-%20Atuendo%20de%20risa.mp4"
+    },
+    {
+        "id": "T1.E16",
+        "title": "Claustrofobia",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E16%20-%20Claustrofobia.mkv"
+    },
+    {
+        "id": "T1.E16",
+        "title": "Claustrofobia",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E16%20-%20Claustrofobia.mp4"
+    },
+    {
+        "id": "T1.E17",
+        "title": "Amnesia",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E17%20-%20Amnesia.mkv"
+    },
+    {
+        "id": "T1.E17",
+        "title": "Amnesia",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E17%20-%20Amnesia.mp4"
+    },
+    {
+        "id": "T1.E18",
+        "title": "Musica salvaje",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E18%20-%20Musica%20salvaje.mkv"
+    },
+    {
+        "id": "T1.E18",
+        "title": "Musica salvaje",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E18%20-%20Musica%20salvaje.mp4"
+    },
+    {
+        "id": "T1.E19",
+        "title": "Frontera",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E19%20-%20Frontera.mkv"
+    },
+    {
+        "id": "T1.E19",
+        "title": "Frontera",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E19%20-%20Frontera.mp4"
+    },
+    {
+        "id": "T1.E20",
+        "title": "Los robots",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E20%20-%20Los%20robots.mkv"
+    },
+    {
+        "id": "T1.E20",
+        "title": "Los robots",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E20%20-%20Los%20robots.mp4"
+    },
+    {
+        "id": "T1.E21",
+        "title": "Zona de gravedad cero",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E21%20-%20Zona%20de%20gravedad%20cero.mkv"
+    },
+    {
+        "id": "T1.E21",
+        "title": "Zona de gravedad cero",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E21%20-%20Zona%20de%20gravedad%20cero.mp4"
+    },
+    {
+        "id": "T1.E22",
+        "title": "Rutina",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E22%20-%20Rutina.mkv"
+    },
+    {
+        "id": "T1.E22",
+        "title": "Rutina",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E22%20-%20Rutina.mp4"
+    },
+    {
+        "id": "T1.E23",
+        "title": "Tocando fondo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E23%20-%20Tocando%20fondo.mkv"
+    },
+    {
+        "id": "T1.E23",
+        "title": "Tocando fondo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E23%20-%20Tocando%20fondo.mp4"
+    },
+    {
+        "id": "T1.E24",
+        "title": "El canal fantasma",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E24%20-%20El%20canal%20fantasma.mkv"
+    },
+    {
+        "id": "T1.E24",
+        "title": "El canal fantasma",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E24%20-%20El%20canal%20fantasma.mp4"
+    },
+    {
+        "id": "T1.E25",
+        "title": "Clave tierra",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E25%20-%20Clave%20tierra.mkv"
+    },
+    {
+        "id": "T1.E25",
+        "title": "Clave tierra",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E25%20-%20Clave%20tierra.mp4"
+    },
+    {
+        "id": "T1.E26",
+        "title": "Salida en falso",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E26%20-%20Salida%20en%20falso.mkv"
+    },
+    {
+        "id": "T1.E26",
+        "title": "Salida en falso",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T1.E26%20-%20Salida%20en%20falso.mp4"
+    },
+    {
+        "id": "T2.E27",
+        "title": "El nuevo orden",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E27%20-%20El%20nuevo%20orden.mkv"
+    },
+    {
+        "id": "T2.E27",
+        "title": "El nuevo orden",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E27%20-%20El%20nuevo%20orden.mp4"
+    },
+    {
+        "id": "T2.E28",
+        "title": "Territorio desconocido",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E28%20-%20Territorio%20desconocido.mkv"
+    },
+    {
+        "id": "T2.E28",
+        "title": "Territorio desconocido",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E28%20-%20Territorio%20desconocido.mp4"
+    },
+    {
+        "id": "T2.E29",
+        "title": "Exploracion",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E29%20-%20Exploracion.mkv"
+    },
+    {
+        "id": "T2.E29",
+        "title": "Exploracion",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E29%20-%20Exploracion.mp4"
+    },
+    {
+        "id": "T2.E30",
+        "title": "Un gran dia",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E30%20-%20Un%20gran%20dia.mkv"
+    },
+    {
+        "id": "T2.E30",
+        "title": "Un gran dia",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E30%20-%20Un%20gran%20dia.mp4"
+    },
+    {
+        "id": "T2.E31",
+        "title": "Mister Puck",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E31%20-%20Mister%20Puck.mkv"
+    },
+    {
+        "id": "T2.E31",
+        "title": "Mister Puck",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E31%20-%20Mister%20Puck.mp4"
+    },
+    {
+        "id": "T2.E32",
+        "title": "El dia de San Valentin",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E32%20-%20El%20dia%20de%20San%20Valentin.mkv"
+    },
+    {
+        "id": "T2.E32",
+        "title": "El dia de San Valentin",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E32%20-%20El%20dia%20de%20San%20Valentin.mp4"
+    },
+    {
+        "id": "T2.E33",
+        "title": "La mezcla final",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E33%20-%20La%20mezcla%20final.mkv"
+    },
+    {
+        "id": "T2.E33",
+        "title": "La mezcla final",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E33%20-%20La%20mezcla%20final.mp4"
+    },
+    {
+        "id": "T2.E34",
+        "title": "El eslabon perdido",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E34%20-%20El%20eslabon%20perdido.mkv"
+    },
+    {
+        "id": "T2.E34",
+        "title": "El eslabon perdido",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E34%20-%20El%20eslabon%20perdido.mp4"
+    },
+    {
+        "id": "T2.E35",
+        "title": "Las cartas sobre la mesa",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E35%20-%20Las%20cartas%20sobre%20la%20mesa.mkv"
+    },
+    {
+        "id": "T2.E35",
+        "title": "Las cartas sobre la mesa",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E35%20-%20Las%20cartas%20sobre%20la%20mesa.mp4"
+    },
+    {
+        "id": "T2.E36",
+        "title": "Marabunta",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E36%20-%20Marabunta.mkv"
+    },
+    {
+        "id": "T2.E36",
+        "title": "Marabunta",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E36%20-%20Marabunta.mp4"
+    },
+    {
+        "id": "T2.E37",
+        "title": "Por el bien comun",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E37%20-%20Por%20el%20bien%20comun.mkv"
+    },
+    {
+        "id": "T2.E37",
+        "title": "Por el bien comun",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E37%20-%20Por%20el%20bien%20comun.mp4"
+    },
+    {
+        "id": "T2.E38",
+        "title": "La tentacion",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E38%20-%20La%20tentacion.mkv"
+    },
+    {
+        "id": "T2.E38",
+        "title": "La tentacion",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E38%20-%20La%20tentacion.mp4"
+    },
+    {
+        "id": "T2.E39",
+        "title": "Un mal giro",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E39%20-%20Un%20mal%20giro.mkv"
+    },
+    {
+        "id": "T2.E39",
+        "title": "Un mal giro",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E39%20-%20Un%20mal%20giro.mp4"
+    },
+    {
+        "id": "T2.E40",
+        "title": "El ataque de los zombies",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E40%20-%20El%20ataque%20de%20los%20zombies.mkv"
+    },
+    {
+        "id": "T2.E40",
+        "title": "El ataque de los zombies",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E40%20-%20El%20ataque%20de%20los%20zombies.mp4"
+    },
+    {
+        "id": "T2.E41",
+        "title": "El ultimatum",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E41%20-%20El%20ultimatum.mkv"
+    },
+    {
+        "id": "T2.E41",
+        "title": "El ultimatum",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E41%20-%20El%20ultimatum.mp4"
+    },
+    {
+        "id": "T2.E42",
+        "title": "Un buen lio",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E42%20-%20Un%20buen%20lio.mkv"
+    },
+    {
+        "id": "T2.E42",
+        "title": "Un buen lio",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E42%20-%20Un%20buen%20lio.mp4"
+    },
+    {
+        "id": "T2.E43",
+        "title": "El beso de XANA",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E43%20-%20El%20beso%20de%20XANA.mkv"
+    },
+    {
+        "id": "T2.E43",
+        "title": "El beso de XANA",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E43%20-%20El%20beso%20de%20XANA.mp4"
+    },
+    {
+        "id": "T2.E44",
+        "title": "Vertigo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E44%20-%20Vertigo.mkv"
+    },
+    {
+        "id": "T2.E44",
+        "title": "Vertigo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E44%20-%20Vertigo.mp4"
+    },
+    {
+        "id": "T2.E45",
+        "title": "La guerra fria",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E45%20-%20La%20guerra%20fria.mkv"
+    },
+    {
+        "id": "T2.E45",
+        "title": "La guerra fria",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E45%20-%20La%20guerra%20fria.mp4"
+    },
+    {
+        "id": "T2.E46",
+        "title": "Recuerdos del pasado",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E46%20-%20Recuerdos%20del%20pasado.mkv"
+    },
+    {
+        "id": "T2.E46",
+        "title": "Recuerdos del pasado",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E46%20-%20Recuerdos%20del%20pasado.mp4"
+    },
+    {
+        "id": "T2.E47",
+        "title": "El plena forma",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E47%20-%20El%20plena%20forma.mkv"
+    },
+    {
+        "id": "T2.E47",
+        "title": "El plena forma",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E47%20-%20El%20plena%20forma.mp4"
+    },
+    {
+        "id": "T2.E48",
+        "title": "¿Hay alguien ahi？",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E48%20-%20%C2%BFHay%20alguien%20ahi%EF%BC%9F.mkv"
+    },
+    {
+        "id": "T2.E48",
+        "title": "¿Hay alguien ahi？",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E48%20-%20%C2%BFHay%20alguien%20ahi%EF%BC%9F.mp4"
+    },
+    {
+        "id": "T2.E49",
+        "title": "Franz Hopper",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E49%20-%20Franz%20Hopper.mkv"
+    },
+    {
+        "id": "T2.E49",
+        "title": "Franz Hopper",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E49%20-%20Franz%20Hopper.mp4"
+    },
+    {
+        "id": "T2.E50",
+        "title": "Contacto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E50%20-%20Contacto.mkv"
+    },
+    {
+        "id": "T2.E50",
+        "title": "Contacto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E50%20-%20Contacto.mp4"
+    },
+    {
+        "id": "T2.E51",
+        "title": "La gran revelacion",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E51%20-%20La%20gran%20revelacion.mkv"
+    },
+    {
+        "id": "T2.E51",
+        "title": "La gran revelacion",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E51%20-%20La%20gran%20revelacion.mp4"
+    },
+    {
+        "id": "T2.E52",
+        "title": "La llave",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E52%20-%20La%20llave.mkv"
+    },
+    {
+        "id": "T2.E52",
+        "title": "La llave",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T2.E52%20-%20La%20llave.mp4"
+    },
+    {
+        "id": "T3.E53",
+        "title": "Directo al corazon",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E53%20-%20Directo%20al%20corazon.mkv"
+    },
+    {
+        "id": "T3.E53",
+        "title": "Directo al corazon",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E53%20-%20Directo%20al%20corazon.mp4"
+    },
+    {
+        "id": "T3.E54",
+        "title": "Lyoko menos uno",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E54%20-%20Lyoko%20menos%20uno.mkv"
+    },
+    {
+        "id": "T3.E54",
+        "title": "Lyoko menos uno",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E54%20-%20Lyoko%20menos%20uno.mp4"
+    },
+    {
+        "id": "T3.E55",
+        "title": "Maremoto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E55%20-%20Maremoto.mkv"
+    },
+    {
+        "id": "T3.E55",
+        "title": "Maremoto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E55%20-%20Maremoto.mp4"
+    },
+    {
+        "id": "T3.E56",
+        "title": "Una pista falsa",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E56%20-%20Una%20pista%20falsa.mkv"
+    },
+    {
+        "id": "T3.E56",
+        "title": "Una pista falsa",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E56%20-%20Una%20pista%20falsa.mp4"
+    },
+    {
+        "id": "T3.E57",
+        "title": "Aelita",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E57%20-%20Aelita.mkv"
+    },
+    {
+        "id": "T3.E57",
+        "title": "Aelita",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E57%20-%20Aelita.mp4"
+    },
+    {
+        "id": "T3.E58",
+        "title": "El pretendiente",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E58%20-%20El%20pretendiente.mkv"
+    },
+    {
+        "id": "T3.E58",
+        "title": "El pretendiente",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E58%20-%20El%20pretendiente.mp4"
+    },
+    {
+        "id": "T3.E59",
+        "title": "El secreto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E59%20-%20El%20secreto.mkv"
+    },
+    {
+        "id": "T3.E59",
+        "title": "El secreto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E59%20-%20El%20secreto.mp4"
+    },
+    {
+        "id": "T3.E60",
+        "title": "Locura transitoria",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E60%20-%20Locura%20transitoria.mkv"
+    },
+    {
+        "id": "T3.E60",
+        "title": "Locura transitoria",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E60%20-%20Locura%20transitoria.mp4"
+    },
+    {
+        "id": "T3.E61",
+        "title": "Sabotaje",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E61%20-%20Sabotaje.mkv"
+    },
+    {
+        "id": "T3.E61",
+        "title": "Sabotaje",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E61%20-%20Sabotaje.mp4"
+    },
+    {
+        "id": "T3.E62",
+        "title": "Nadie en particular",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E62%20-%20Nadie%20en%20particular.mkv"
+    },
+    {
+        "id": "T3.E62",
+        "title": "Nadie en particular",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E62%20-%20Nadie%20en%20particular.mp4"
+    },
+    {
+        "id": "T3.E63",
+        "title": "Un problema por triplicado",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E63%20-%20Un%20problema%20por%20triplicado.mkv"
+    },
+    {
+        "id": "T3.E63",
+        "title": "Un problema por triplicado",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E63%20-%20Un%20problema%20por%20triplicado.mp4"
+    },
+    {
+        "id": "T3.E64",
+        "title": "Un problema por duplicado",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E64%20-%20Un%20problema%20por%20duplicado.mkv"
+    },
+    {
+        "id": "T3.E64",
+        "title": "Un problema por duplicado",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E64%20-%20Un%20problema%20por%20duplicado.mp4"
+    },
+    {
+        "id": "T3.E65",
+        "title": "El ultimo asalto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E65%20-%20El%20ultimo%20asalto.mkv"
+    },
+    {
+        "id": "T3.E65",
+        "title": "El ultimo asalto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T3.E65%20-%20El%20ultimo%20asalto.mp4"
+    },
+    {
+        "id": "T4.E66",
+        "title": "El regreso de William",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E66%20-%20El%20regreso%20de%20William.mkv"
+    },
+    {
+        "id": "T4.E66",
+        "title": "El regreso de William",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E66%20-%20El%20regreso%20de%20William.mp4"
+    },
+    {
+        "id": "T4.E67",
+        "title": "Doble o nada",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E67%20-%20Doble%20o%20nada.mkv"
+    },
+    {
+        "id": "T4.E67",
+        "title": "Doble o nada",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E67%20-%20Doble%20o%20nada.mp4"
+    },
+    {
+        "id": "T4.E68",
+        "title": "Teloneros",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E68%20-%20Teloneros.mkv"
+    },
+    {
+        "id": "T4.E68",
+        "title": "Teloneros",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E68%20-%20Teloneros.mp4"
+    },
+    {
+        "id": "T4.E69",
+        "title": "Sala de recreo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E69%20-%20Sala%20de%20recreo.mkv"
+    },
+    {
+        "id": "T4.E69",
+        "title": "Sala de recreo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E69%20-%20Sala%20de%20recreo.mp4"
+    },
+    {
+        "id": "T4.E70",
+        "title": "Skidbladnir",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E70%20-%20Skidbladnir.mkv"
+    },
+    {
+        "id": "T4.E70",
+        "title": "Skidbladnir",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E70%20-%20Skidbladnir.mp4"
+    },
+    {
+        "id": "T4.E71",
+        "title": "Viaje inaugural",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E71%20-%20Viaje%20inaugural.mkv"
+    },
+    {
+        "id": "T4.E71",
+        "title": "Viaje inaugural",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E71%20-%20Viaje%20inaugural.mp4"
+    },
+    {
+        "id": "T4.E72",
+        "title": "Curso intensivo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E72%20-%20Curso%20intensivo.mkv"
+    },
+    {
+        "id": "T4.E72",
+        "title": "Curso intensivo",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E72%20-%20Curso%20intensivo.mp4"
+    },
+    {
+        "id": "T4.E73",
+        "title": "Replika",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E73%20-%20Replika.mkv"
+    },
+    {
+        "id": "T4.E73",
+        "title": "Replika",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E73%20-%20Replika.mp4"
+    },
+    {
+        "id": "T4.E74",
+        "title": "Prefiero no hablar del tema",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E74%20-%20Prefiero%20no%20hablar%20del%20tema.mkv"
+    },
+    {
+        "id": "T4.E74",
+        "title": "Prefiero no hablar del tema",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E74%20-%20Prefiero%20no%20hablar%20del%20tema.mp4"
+    },
+    {
+        "id": "T4.E75",
+        "title": "Una lluvia muy caliente",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E75%20-%20Una%20lluvia%20muy%20caliente.mkv"
+    },
+    {
+        "id": "T4.E75",
+        "title": "Una lluvia muy caliente",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E75%20-%20Una%20lluvia%20muy%20caliente.mp4"
+    },
+    {
+        "id": "T4.E76",
+        "title": "El lago",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E76%20-%20El%20lago.mkv"
+    },
+    {
+        "id": "T4.E76",
+        "title": "El lago",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E76%20-%20El%20lago.mp4"
+    },
+    {
+        "id": "T4.E77",
+        "title": "Perdida en el mar",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E77%20-%20Perdida%20en%20el%20mar.mkv"
+    },
+    {
+        "id": "T4.E77",
+        "title": "Perdida en el mar",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E77%20-%20Perdida%20en%20el%20mar.mp4"
+    },
+    {
+        "id": "T4.E78",
+        "title": "El laboratorio",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E78%20-%20El%20laboratorio.mkv"
+    },
+    {
+        "id": "T4.E78",
+        "title": "El laboratorio",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E78%20-%20El%20laboratorio.mp4"
+    },
+    {
+        "id": "T4.E79",
+        "title": "Derecho a vacilar",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E79%20-%20Derecho%20a%20vacilar.mkv"
+    },
+    {
+        "id": "T4.E79",
+        "title": "Derecho a vacilar",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E79%20-%20Derecho%20a%20vacilar.mp4"
+    },
+    {
+        "id": "T4.E80",
+        "title": "Una tarde de perros",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E80%20-%20Una%20tarde%20de%20perros.mkv"
+    },
+    {
+        "id": "T4.E80",
+        "title": "Una tarde de perros",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E80%20-%20Una%20tarde%20de%20perros.mp4"
+    },
+    {
+        "id": "T4.E81",
+        "title": "Falta de buena voluntad",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E81%20-%20Falta%20de%20buena%20voluntad.mkv"
+    },
+    {
+        "id": "T4.E81",
+        "title": "Falta de buena voluntad",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E81%20-%20Falta%20de%20buena%20voluntad.mp4"
+    },
+    {
+        "id": "T4.E82",
+        "title": "Recuerdos lejanos",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E82%20-%20Recuerdos%20lejanos.mkv"
+    },
+    {
+        "id": "T4.E82",
+        "title": "Recuerdos lejanos",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E82%20-%20Recuerdos%20lejanos.mp4"
+    },
+    {
+        "id": "T4.E83",
+        "title": "Mala suerte",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E83%20-%20Mala%20suerte.mkv"
+    },
+    {
+        "id": "T4.E83",
+        "title": "Mala suerte",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E83%20-%20Mala%20suerte.mp4"
+    },
+    {
+        "id": "T4.E84",
+        "title": "Misil teledirigido",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E84%20-%20Misil%20teledirigido.mkv"
+    },
+    {
+        "id": "T4.E84",
+        "title": "Misil teledirigido",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E84%20-%20Misil%20teledirigido.mp4"
+    },
+    {
+        "id": "T4.E85",
+        "title": "La rubia peligrosa de Kadic",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E85%20-%20La%20rubia%20peligrosa%20de%20Kadic.mkv"
+    },
+    {
+        "id": "T4.E85",
+        "title": "La rubia peligrosa de Kadic",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E85%20-%20La%20rubia%20peligrosa%20de%20Kadic.mp4"
+    },
+    {
+        "id": "T4.E86",
+        "title": "Un dilema de perros",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E86%20-%20Un%20dilema%20de%20perros.mkv"
+    },
+    {
+        "id": "T4.E86",
+        "title": "Un dilema de perros",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E86%20-%20Un%20dilema%20de%20perros.mp4"
+    },
+    {
+        "id": "T4.E87",
+        "title": "Odd y su odisea espacial",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E87%20-%20Odd%20y%20su%20odisea%20espacial.mkv"
+    },
+    {
+        "id": "T4.E87",
+        "title": "Odd y su odisea espacial",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E87%20-%20Odd%20y%20su%20odisea%20espacial.mp4"
+    },
+    {
+        "id": "T4.E88",
+        "title": "Dos primos enfrentados",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E88%20-%20Dos%20primos%20enfrentados.mkv"
+    },
+    {
+        "id": "T4.E88",
+        "title": "Dos primos enfrentados",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E88%20-%20Dos%20primos%20enfrentados.mp4"
+    },
+    {
+        "id": "T4.E89",
+        "title": "Musica para amansar a la bestia salvaje",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E89%20-%20Musica%20para%20amansar%20a%20la%20bestia%20salvaje.mkv"
+    },
+    {
+        "id": "T4.E89",
+        "title": "Musica para amansar a la bestia salvaje",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E89%20-%20Musica%20para%20amansar%20a%20la%20bestia%20salvaje.mp4"
+    },
+    {
+        "id": "T4.E90",
+        "title": "La foto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E90%20-%20La%20foto.mkv"
+    },
+    {
+        "id": "T4.E90",
+        "title": "La foto",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E90%20-%20La%20foto.mp4"
+    },
+    {
+        "id": "T4.E91",
+        "title": "Una mala conexion",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E91%20-%20Una%20mala%20conexion.mkv"
+    },
+    {
+        "id": "T4.E91",
+        "title": "Una mala conexion",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E91%20-%20Una%20mala%20conexion.mp4"
+    },
+    {
+        "id": "T4.E92",
+        "title": "Sudor frio",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E92%20-%20Sudor%20frio.mkv"
+    },
+    {
+        "id": "T4.E92",
+        "title": "Sudor frio",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E92%20-%20Sudor%20frio.mp4"
+    },
+    {
+        "id": "T4.E93",
+        "title": "Vuelta a la tierra",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E93%20-%20Vuelta%20a%20la%20tierra.mkv"
+    },
+    {
+        "id": "T4.E93",
+        "title": "Vuelta a la tierra",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E93%20-%20Vuelta%20a%20la%20tierra.mp4"
+    },
+    {
+        "id": "T4.E94",
+        "title": "Luchar hasta el final",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E94%20-%20Luchar%20hasta%20el%20final.mkv"
+    },
+    {
+        "id": "T4.E94",
+        "title": "Luchar hasta el final",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E94%20-%20Luchar%20hasta%20el%20final.mp4"
+    },
+    {
+        "id": "T4.E95",
+        "title": "Ecos del pasado",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E95%20-%20Ecos%20del%20pasado.mkv"
+    },
+    {
+        "id": "T4.E95",
+        "title": "Ecos del pasado",
+        "video": "https://archive.org/download/codigo-lyoko-castellano-1080p/Codigo%20Lyoko%20%5BEspa%C3%B1ol%20Castellano%5D%20%28Remasterizado%201080p%29/Codigo%20Lyoko%20-%20T4.E95%20-%20Ecos%20del%20pasado.mp4"
+    }
+];
+
+// 1. Agrupar formatos bajo el mismo ID
+const mapEpisodes = new Map();
+rawEpisodes.forEach(ep => {
+    
+    // Extraer Temp y Cap para ordenar ej "T1.E01" -> Temp 1, Cap 1
+    const match = ep.id.match(/T(\d+)\.E(\d+)/);
+    const season = match ? parseInt(match[1]) : 0;
+    const num = match ? parseInt(match[2]) : 0;
+
+    if(!mapEpisodes.has(ep.id)) {
+        mapEpisodes.set(ep.id, {
+            id: ep.id,
+            title: ep.title,
+            season: season,
+            num: num,
+            videos: []
+        });
+    }
+
+    const formatExt = ep.video.split('.').pop().toUpperCase();
+    mapEpisodes.get(ep.id).videos.push({ format: formatExt, url: ep.video });
+});
+
+// 2. Ordenar por Temporada y luego por Número (00 al 97)
+const sortedEpisodes = Array.from(mapEpisodes.values()).sort((a, b) => {
+    if (a.season !== b.season) return a.season - b.season;
+    return a.num - b.num;
+});
+
+/* =========================================================
+   SISTEMA DE PROGRESO Y BLOQUEO
+========================================================= */
+
+let highestUnlockedIndex = parseInt(localStorage.getItem("highestUnlocked")) || 0;
+let currentPlayingIndex = 0;
+
+function triggerError() {
+    soundErrorXana();
+    const err = document.getElementById("errorScreen");
+    err.style.display = "flex";
+    setTimeout(() => {
+        err.style.display = "none";
+    }, 1500);
+}
+
+/* =========================================================
+   CARGAR ICONOS Y RENDERIZAR
+========================================================= */
+
+function loadEpisodes(){
+
+    const grid =
+    document.getElementById(
+    "journalGrid");
+    
+    grid.innerHTML = "";
+
+    sortedEpisodes.forEach(
+    (ep,index)=>{
+
+        const item =
+        document.createElement(
+        "div");
+
+        item.className =
+        "journal-item";
+        
+        // Bloquear si el índice es mayor al máximo desbloqueado
+        if(index > highestUnlockedIndex) {
+            item.classList.add("locked");
+        }
+
+        item.innerHTML = `
+
+        <div
+        class="journal-rhombus">
+
+            <div
+            class="cd-center"></div>
+
+        </div>
+
+        <br>
+        
+        <div
+        class="journal-label">
+
+            ${ep.id}<br>
+            ${ep.title}
+
+        </div>
+
+        `;
+
+        setTimeout(()=>{
+
+            item.classList.add(
+            "show");
+
+        },index * 90);
+
+        const rhombus =
+        item.querySelector(
+        ".journal-rhombus");
+
+        if(currentPlayingIndex === index && index <= highestUnlockedIndex){
+            rhombus.classList.add("active");
+        }
+
+        item.addEventListener(
+        "click",()=>{
+
+            if(index > highestUnlockedIndex) {
+                triggerError();
+                return;
+            }
+
+            document
+            .querySelectorAll(
+            ".journal-rhombus")
+            .forEach(r=>{
+                r.classList.remove("active");
+            });
+
+            rhombus.classList.add("active");
+            currentPlayingIndex = index;
+
+            openPlayer(ep);
+
+        });
+
+        grid.appendChild(item);
+
+    });
+}
+
+/* =========================================================
+   ABRIR PLAYER Y SELECTOR MP4/MKV
+========================================================= */
+
+function openPlayer(ep){
+    // Pausar música de fondo al abrir el reproductor
+    if (bgAudio) {
+        bgAudio.pause();
+    }
+
+    player.style.display = "flex";
+    playerTitle.innerText = ep.id + " - " + ep.title;
+    
+    // Inyectar Botones de formato (si hay mp4, mkv, etc)
+    const formatSelector = document.getElementById("formatSelector");
+    formatSelector.innerHTML = "";
+    
+    ep.videos.forEach((vid, i) => {
+        const btn = document.createElement("button");
+        btn.className = "format-btn" + (i === 0 ? " active" : "");
+        btn.innerText = vid.format;
+        
+        btn.onclick = () => {
+            document.querySelectorAll(".format-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            
+            // Mantener tiempo actual al cambiar fuente
+            const currentTime = video.currentTime;
+            video.src = vid.url;
+            video.currentTime = currentTime;
+            video.play();
+        };
+        
+        formatSelector.appendChild(btn);
+    });
+
+    // Cargar por defecto la primera opción disponible
+    video.src = ep.videos[0].url;
+    video.play();
+}
+
+/* =========================================================
+   AUTOPASE AL SIGUIENTE EPISODIO Y DESBLOQUEO
+========================================================= */
+
+video.addEventListener("ended", () => {
+    // Si se acabó el último vídeo que tenías desbloqueado, desbloquea el siguiente
+    if(currentPlayingIndex === highestUnlockedIndex && currentPlayingIndex < sortedEpisodes.length - 1) {
+        highestUnlockedIndex++;
+        localStorage.setItem("highestUnlocked", highestUnlockedIndex);
+        loadEpisodes(); // Refrescar vista de cuadrícula para quitar candado
+    }
+    
+    // Pasar al siguiente de forma automática
+    if(currentPlayingIndex < sortedEpisodes.length - 1) {
+        currentPlayingIndex++;
+        
+        // Actualizar UI del grid
+        document.querySelectorAll(".journal-rhombus").forEach((r, idx) => {
+            r.classList.remove("active");
+            if(idx === currentPlayingIndex) r.classList.add("active");
+        });
+        
+        openPlayer(sortedEpisodes[currentPlayingIndex]);
+    } else {
+        // Si no hay más episodios, simplemente volver a reproducir la música de fondo
+        if (bgAudio) {
+            bgAudio.play().catch(e => console.log(e));
+        }
+    }
+});
+
+
+/* =========================================================
+   CERRAR PLAYER
+========================================================= */
+
+function closePlayer(){
+    player.style.display = "none";
+    video.pause();
+
+    // Reanudar la música de fondo al salir del vídeo
+    if (bgAudio) {
+        bgAudio.play().catch(e => console.log(e));
+    }
+}
+
+</script>
+
+</body>
+</html>
