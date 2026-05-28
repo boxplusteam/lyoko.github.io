@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Superordenador Lyoko - Archivo Digital</title>
+
+<style>
+/* =========================================================
+   RESET Y VARIABLES
+========================================================= */
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+:root {
+    --cyan: #00E5FF;
+    --red-xana: #ff003c;
+    --dark: #000814;
+    --glass: rgba(255,255,255,.05);
+}
+body {
+    font-family: Arial, sans-serif;
+    background: radial-gradient(circle at top, #04204d 0%, #000814 60%, #000000 100%);
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+@font-face {
+    font-family: 'Gunship';
+    src: url('GUNSHIP2.TTF') format('truetype');
+    font-display: swap;
+}
+
+/* Fondo de cuadrícula digital */
+body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(0,229,255,.04) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,229,255,.04) 1px, transparent 1px);
+    background-size: 32px 32px; z-index: -2;
+}
+body::after {
+    content: ''; position: fixed; inset: 0;
+    background: radial-gradient(circle at center, rgba(0,229,255,.08), transparent 60%);
+    z-index: -1; pointer-events: none;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+.hero {
+    width: 100%; min-height: 280px; display: flex; align-items: center; justify-content: center;
+    flex-direction: column; position: relative; overflow: hidden;
+    border-bottom: 1px solid rgba(0,229,255,.2); padding: 40px 20px;
+}
+.lyoko-ring {
+    width: 100px; height: 100px; border-radius: 50%;
+    border: 4px solid rgba(255,255,255,.8);
+    background: conic-gradient(#ffffff, #00E5FF, #001b44, #ffffff);
+    animation: spin 6s linear infinite;
+    box-shadow: 0 0 20px rgba(0,229,255,.8), 0 0 60px rgba(0,229,255,.3); z-index: 1;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.hero h1 {
+    font-family: 'Gunship', sans-serif; font-size: clamp(1.8rem, 4vw, 3.5rem);
+    margin-top: 20px; text-align: center; letter-spacing: 5px; color: white;
+    text-shadow: 0 0 12px var(--cyan), 0 0 30px var(--cyan); z-index: 1;
+}
+.hero p { max-width: 900px; margin-top: 15px; text-align: center; line-height: 1.6; color: #d5f8ff; z-index: 1; font-size: 0.9rem; }
+
+/* =========================================================
+   GRID ESTILO NETFLIX (GRID MIXTO)
+========================================================= */
+.book-wrapper { max-width: 1600px; margin: auto; padding: 40px 20px 100px; }
+.section-title {
+    font-family: 'Gunship', sans-serif; font-size: clamp(1rem, 2.5vw, 1.6rem);
+    color: white; margin-bottom: 30px; letter-spacing: 3px;
+    text-shadow: 0 0 10px var(--cyan); display: flex; align-items: center; gap: 15px;
+}
+.section-title::before { content: ''; width: 40px; height: 3px; background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+
+.card-grid {
+    display: grid;
+    /* Ajustado para tarjetas base más compactas (estilo póster pequeño) */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-auto-flow: dense; /* Rellena huecos de forma inteligente */
+    gap: 25px;
+}
+
+/* =========================================================
+   VARIACIONES DE DISEÑO (POSTER VS LANDSCAPE)
+========================================================= */
+/* Tarjeta Base (Estilo Póster vertical y pequeño) */
+.card-container {
+    perspective: 1500px;
+    height: 480px; /* Más bajas y compactas que antes */
+    cursor: pointer;
+}
+
+/* Tarjeta Estilo Banner Horizontal (Ocupa 2 columnas en la cuadrícula) */
+.card-container.landscape {
+    grid-column: span 2;
+}
+
+/* Ajustes responsivos para evitar desbordes en pantallas pequeñas */
+@media (max-width: 600px) {
+    .card-container.landscape {
+        grid-column: span 1;
+        height: 420px;
+    }
+}
+
+.card-inner {
+    position: relative;
+    width: 100%; height: 100%;
+    transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+    transform-style: preserve-3d;
+}
+
+.card-container.is-flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,.5);
+    border: 1px solid rgba(0,229,255,.15);
+}
+
+/* =========================================================
+   CARA FRONTAL: COMPACTACIÓN Y HOVER EFECTO "DOWN"
+========================================================= */
+.card-front {
+    background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.01));
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card-container:hover .card-front {
+    border-color: rgba(0,229,255,.6);
+    box-shadow: 0 15px 35px rgba(0,229,255,.2);
+}
+
+/* Fondo dinámico al pasar el cursor */
+.hover-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center bottom;
+    opacity: 0;
+    z-index: 0;
+    mix-blend-mode: overlay;
+    clip-path: inset(100% 0 0 0); 
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s ease;
+}
+.card-container:not(.is-flipped):hover .hover-bg { 
+    opacity: 0.6;
+    transform: translateY(0);
+    clip-path: inset(0% 0 0 0);
+}
+
+/* Zona superior de la imagen */
+.card-top {
+    height: 260px;
+    position: relative;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 12px; z-index: 2;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Modificación si es Landscape: imagen centrada/ajustada diferente */
+.landscape .card-top {
+    height: 280px;
+}
+
+.character-img {
+    width: 100%; height: 100%; object-fit: contain; object-position: center bottom;
+    filter: drop-shadow(0 8px 15px rgba(0,0,0,.7));
+    z-index: 2;
+}
+
+/* EFECTO HOVER: El personaje baja y toma el control de la tarjeta compacta */
+.card-container:not(.is-flipped):hover .card-top {
+    transform: translateY(180px) scale(1.05);
+}
+.card-container.landscape:not(.is-flipped):hover .card-top {
+    transform: translateY(150px) scale(1.03);
+}
+
+/* Bloque inferior de información básica */
+.card-content { 
+    padding: 18px; 
+    position: relative; 
+    z-index: 1; 
+    background: rgba(0, 8, 20, 0.9); 
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.5s ease, opacity 0.4s ease;
+    transform-origin: center bottom;
+    border-top: 1px solid rgba(0,229,255,.05);
+}
+
+/* El contenido se va hacia el fondo en hover */
+.card-container:not(.is-flipped):hover .card-content {
+    opacity: 0;
+    transform: scale(0.85) translateZ(-80px);
+    pointer-events: none;
+}
+
+.version-badge { 
+    position: absolute; top: 12px; left: 12px; 
+    background: linear-gradient(135deg, #ffe28a, #9e7f33); color: #000; 
+    font-weight: bold; font-size: .65rem; padding: 6px 10px; border-radius: 999px; 
+    z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,.4); letter-spacing: 1px;
+    transition: opacity 0.3s ease;
+}
+.card-container:not(.is-flipped):hover .version-badge { opacity: 0; }
+
+.character-name { font-family: 'Gunship', sans-serif; font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 6px; color: white; text-shadow: 0 0 6px var(--cyan); }
+.character-desc { color: #bde5ee; line-height: 1.4; font-size: 0.8rem; }
+
+/* Barras pequeñas */
+.stats { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+.stat { display: flex; align-items: center; gap: 10px; }
+.stat-label { width: 35px; font-size: .65rem; font-weight: bold; color: #fff; }
+.stat-bar { flex: 1; height: 6px; background: #02101f; border-radius: 999px; overflow: hidden; border: 1px solid rgba(255,255,255,.05); }
+.stat-fill { height: 100%; background: linear-gradient(90deg, #ffffff, #00E5FF, #0077ff); }
+
+/* =========================================================
+   CARA TRASERA (X.A.N.A.)
+========================================================= */
+.card-back {
+    transform: rotateY(180deg);
+    background: radial-gradient(circle at center, #140004 0%, #000 100%);
+    border-color: rgba(255, 0, 60, 0.3);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.xana-logo {
+    width: 50px; height: 50px;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px var(--red-xana));
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.wiki-data { width: 100%; text-align: left; flex-grow: 1; }
+.wiki-data h4 { font-family: 'Gunship', sans-serif; color: var(--red-xana); margin-bottom: 8px; font-size: 0.85rem; text-shadow: 0 0 6px var(--red-xana); border-bottom: 1px solid var(--red-xana); padding-bottom: 3px; }
+.wiki-data p { color: #bbb; font-size: 0.75rem; line-height: 1.4; margin-bottom: 10px; }
+.wiki-data ul { list-style: none; padding: 0; color: #fff; font-size: 0.75rem; }
+.wiki-data ul li { margin-bottom: 5px; display: flex; gap: 6px; }
+.wiki-data ul li strong { color: var(--red-xana); }
+
+.btn-xana {
+    width: 100%;
+    background: linear-gradient(90deg, #220006, #4a000e);
+    border: 1px solid var(--red-xana);
+    color: #ffb3bf;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: 'Gunship', sans-serif;
+    font-size: 0.7rem;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: background 0.3s, transform 0.2s;
+}
+.btn-xana:hover {
+    background: var(--red-xana);
+    color: white;
+    box-shadow: 0 0 15px var(--red-xana);
+    transform: scale(1.02);
+}
+
+/* =========================================================
+   PANTALLA TERMINAL OVERLAY
+========================================================= */
+.terminal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.96);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 20px;
+}
+.terminal-overlay.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.terminal-window {
+    width: 100%;
+    max-width: 800px;
+    background: #050002;
+    border: 2px solid var(--red-xana);
+    box-shadow: 0 0 50px rgba(255, 0, 60, 0.4);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.terminal-header {
+    background: #1a0005;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--red-xana);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.terminal-title { font-family: 'Gunship', sans-serif; color: var(--red-xana); font-size: 0.85rem; letter-spacing: 2px; }
+.terminal-close {
+    background: transparent; border: 1px solid var(--red-xana); color: var(--red-xana);
+    width: 28px; height: 28px; border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; font-weight: bold;
+}
+.terminal-close:hover { background: var(--red-xana); color: white; }
+.terminal-body { padding: 30px; max-height: 70vh; overflow-y: auto; font-family: monospace; color: #ff99a8; position: relative; }
+.terminal-welcome { font-size: 1.1rem; font-weight: bold; color: #fff; text-shadow: 0 0 6px var(--red-xana); margin-bottom: 15px; }
+.terminal-text-block { border-left: 3px solid var(--red-xana); padding-left: 12px; margin-bottom: 20px; line-height: 1.6; font-size: 0.9rem; }
+.terminal-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.terminal-list li { font-size: 0.85rem; background: rgba(255, 0, 60, 0.04); padding: 10px 15px; border-radius: 6px; border: 1px solid rgba(255, 0, 60, 0.1); }
+.terminal-list strong { color: #fff; }
+
+/* FOOTER */
+.footer { border-top: 1px solid rgba(0,229,255,.2); padding: 30px 20px; text-align: center; color: #9fd9e6; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+
+<main class="book-wrapper">
+    <section class="book-section">
+        <h2 class="section-title">KIWIPEDIA</h2>
+        <div class="card-grid" id="main-grid"></div>
+    </section>
+</main>
+
+<div class="terminal-overlay" id="terminal">
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <div class="terminal-title">> COMPILANDO REGISTRO NÚCLEO CENTRAL INTERNO</div>
+            <button class="terminal-close" onclick="closeTerminal(event)">X</button>
+        </div>
+        <div class="terminal-body" id="terminal-content"></div>
+    </div>
+</div>
+
+<footer class="footer"><p>Archivo digital inspirado en <strong>Code Lyoko</strong></p></footer>
+
+<script>
+
+    
+let localCharactersCache = [];
+
+function toggleFlip(event, cardContainer) {
+    // Si hace clic en el botón de la terminal, cancela el volteado de la carta
+    if (event.target.closest('.btn-xana')) return; 
+    cardContainer.classList.toggle('is-flipped');
+}
+
+async function loadCharacters() {
+    try {
+        const response = await fetch('characters.json');
+        const data = await response.json();
+        localCharactersCache = data.characters;
+        renderGrid(localCharactersCache);
+    } catch (error) {
+        console.error("Error cargando JSON:", error);
+        document.getElementById('main-grid').innerHTML = "<p style='color:red; text-align:center; grid-column: 1/-1;'>Error al enlazar con characters.json. Verifica tu Live Server local.</p>";
+    }
+}
+
+function renderGrid(characters) {
+    const grid = document.getElementById('main-grid');
+    grid.innerHTML = "";
+
+    characters.forEach((character, index) => {
+        const statsHTML = Object.entries(character.attributes)
+        .map(([key,value]) => `
+            <div class="stat">
+                <span class="stat-label">${key.slice(0,4).toUpperCase()}</span>
+                <div class="stat-bar"><div class="stat-fill" style="width:${value}%"></div></div>
+            </div>
+        `).join('');
+
+        // Comprobamos si el elemento del JSON está marcado como "landscape" (banner) o por defecto "poster"
+        const layoutClass = character.layout === 'landscape' ? 'landscape' : '';
+
+        const cardHTML = `
+        <div class="card-container ${layoutClass}" onclick="toggleFlip(event, this)">
+            <div class="card-inner">
+                
+                <div class="card-front">
+                    ${character.version && character.version !== 'Base' ? `<div class="version-badge">${character.version}</div>` : ''}
+                    <div class="hover-bg" style="background-image: url('${character.hover_background}');"></div>
+                    
+                    <div class="card-top">
+                        <img src="${character.image}" class="character-img" alt="${character.name}">
+                    </div>
+                    
+                    <div class="card-content">
+                        <div>
+                            <h3 class="character-name">${character.name}</h3>
+                            <p class="character-desc">${character.description}</p>
+                        </div>
+                        <div class="stats">${statsHTML}</div>
+                    </div>
+                </div>
+
+                <div class="card-back">
+                    <img src="XANA.webp" alt="XANA" class="xana-logo" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/e/e0/XANA_Logo.svg'">
+                    <div class="wiki-data">
+                        <h4>SISTEMA CLASIFICADO</h4>
+                        <p>${character.description}</p>
+                        <ul>
+                            <li><strong>Temporadas:</strong> ${character.seasons || 'Desconocido'}</li>
+                            <li><strong>Módulo:</strong> ${character.outfits || 'Fase Beta'}</li>
+                        </ul>
+                    </div>
+                    <button class="btn-xana" onclick="openTerminal(event, ${index})">
+                        INICIAR TERMINAL
+                    </button>
+                </div>
+
+            </div>
+        </div>`;
+        
+        grid.innerHTML += cardHTML;
+    });
+}
+
+function openTerminal(event, index) {
+    event.stopPropagation();
+    const character = localCharactersCache[index];
+    if(!character) return;
+
+    const terminalBody = document.getElementById('terminal-content');
+    
+    terminalBody.innerHTML = `
+        <div class="terminal-welcome">> NÚCLEO INTERCEPTADO // ARCHIVO FUENTE: ${character.name}</div>
+        <div class="terminal-text-block">
+            <strong>[WIKI_LONG_DATA]:</strong><br>
+            ${character.wiki_long || 'Sin registros adicionales en el sector de red.'}
+        </div>
+        <ul class="terminal-list">
+            <li><strong>[+] APARICIONES:</strong> ${character.seasons || 'Datos no indexados'}</li>
+            <li><strong>[+] VARIACIÓN/PROTOTIPO:</strong> ${character.outfits || 'Código por defecto'}</li>
+            <li><strong>[+] ESPECIFICACIÓN TÉCNICA:</strong> ${character.weapon || 'Ninguna'}</li>
+        </ul>
+    `;
+
+    document.getElementById('terminal').classList.add('is-active');
+}
+
+function closeTerminal(event) {
+    if(event) event.stopPropagation();
+    document.getElementById('terminal').classList.remove('is-active');
+}
+
+loadCharacters();
+
+
+
+
+</script>
+
+
+</body>
+</html>

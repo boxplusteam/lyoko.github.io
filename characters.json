@@ -1,0 +1,533 @@
+{
+  "characters": [
+    {
+      "name": "ODD V2",
+      "layout": "poster", 
+      "image": "wiki/oddv2.webp",
+      "version": "V2",
+      "hover_background": "wiki/sectorhielo.jpg",
+      "description": "Evolución alternativa de Odd.",
+      "attributes": { "spd": 100, "ai": 92, "rng": 98 },
+      "wiki_long": "Desarrollado durante las incursiones...",
+      "seasons": "Temporada 4",
+      "outfits": "Traje de incursión",
+      "weapon": "Láseres dobles"
+    },
+    {
+      "name": "SKIDBLADNIR",
+      "layout": "landscape", 
+      "image": "wiki/skidbladnir.png",
+      "version": "NAV",
+      "hover_background": "wiki/mardigital.jpg",
+      "description": "Submarino digital utilizado para navegar por el Mar Digital.",
+      "attributes": { "spd": 95, "ai": 80, "rng": 85 },
+      "wiki_long": "Creado por Jeremie para explorar la red...",
+      "seasons": "Temporada 4",
+      "outfits": "Nave multi-pasajero",
+      "weapon": "Torpedos de energía"
+    },
+  {
+    "name": "HERB PICHAON",
+    "layout": "poster",
+    "image": "wiki/herb.png",
+    "version": "Base",
+    "hover_background": "wiki/cafeteria.jpg",
+    "description": "Estudiante de Kadic, miembro del grupo de Sissi y segundo al mando después de Nicolas. Destaca por su personalidad competitiva y su lealtad ciega.",
+    "attributes": {
+      "spd": 45,
+      "ai": 78,
+      "rng": 40
+    },
+    "wiki_long": "Herb actúa frecuentemente como el cerebro detrás de los planes menores de Sissi en la academia. Aunque suele mostrarse cobarde ante el peligro real de X.A.N.A., su nivel académico en ciencias es notablemente alto.",
+    "seasons": "Temporadas 1 a 4, Evolution.",
+    "outfits": "Uniforme escolar de Kadic con chaleco verde, gafas redondas.",
+    "weapon": "Estrategias de distracción / Informes disciplinarios."
+  },
+  {
+    "name": "ULRICH STERN",
+    "layout": "landscape",
+    "image": "wiki/Ulrich.webp",
+    "version": "Guerrero Lyoko",
+    "hover_background": "wiki/cafeteria.jpg",
+    "description": "Uno de los defensores principales de Lyoko. Experto en artes marciales, caracterizado por su naturaleza reservada, gran agilidad y velocidad en combate.",
+    "attributes": {
+      "spd": 95,
+      "ai": 85,
+      "rng": 60
+    },
+    "wiki_long": "Equipado con sables digitales y la capacidad de clonarse (Triplicar) o moverse a velocidad hipersónica (Supervelocidad). Su rendimiento físico en el Sector del Bosque y el Sector del Desierto es crítico para la supervivencia del grupo.",
+    "seasons": "Temporadas 1 a 4, Evolution.",
+    "outfits": "Atuendo de samurái digital, traje de incursión en el Mar Digital.",
+    "weapon": "Sables gemelos de energía / Carga de Supervelocidad."
+  },
+  {
+    "name": "SAMANTHA KNIGHT",
+    "layout": "poster",
+    "image": "wiki/samantha.png",
+    "version": "Soporte",
+    "hover_background": "wiki/cafeteria.jpg",
+    "description": "Amiga cercana y el interés romántico de Odd. Una chica rebelde con un gran talento para la música y el monopatín que se ve envuelta de forma indirecta en los incidentes.",
+    "attributes": {
+      "spd": 75,
+      "ai": 70,
+      "rng": 50
+    },
+    "wiki_long": "Aparece originalmente en la escuela vecina antes de ingresar temporalmente en Kadic. Aunque no posee un avatar en Lyoko, ha demostrado un gran valor ayudando a los Guerreros en el mundo real durante los ataques informáticos.",
+    "seasons": "Temporada 2, Temporada 4.",
+    "outfits": "Estilo urbano con mechones rojos, gargantilla negra y ropa deportiva.",
+    "weapon": "Maniobras de escape en monopatín / Hackeo básico de sistemas urbanos."
+  },
+
+  {
+    "name": "YUMI ISHIYAMA",
+    "layout": "poster",
+    "image": "wiki/yumi.webp",
+    "version": "Base",
+    "hover_background": "wiki/kadicpasillo.jpg",
+    "description": "Estudiante de Kadic de último año. Destaca por su madurez, su ropa de estilo gótico/urbano oscuro y su gran habilidad táctica en el grupo.",
+    "attributes": {
+      "spd": 75,
+      "ai": 90,
+      "rng": 55
+    },
+    "wiki_long": "Actúa a menudo como el pilar emocional del grupo en el mundo real. Mantiene una relación compleja con Ulrich y es la mayor de los Guerreros de Lyoko, lo que le otorga un sentido de la responsabilidad muy alto.",
+    "seasons": "Temporadas 1 a 4, Evolution.",
+    "outfits": "Ropa oscura, botas de plataforma, camiseta corta con estrellas astrales.",
+    "weapon": "Combate cuerpo a cuerpo / Disciplina marcial."
+  },
+  {
+    "name": "YUMI V1",
+    "layout": "landscape",
+    "image": "wiki/yumiv1.png",
+    "version": "Geisha",
+    "hover_background": "wiki/sectorbosque.jpg",
+    "description": "Forma digital clásica de Yumi inspirada en una geisha tradicional. Una guerrera ágil con una gran precisión a larga distancia.",
+    "attributes": {
+      "spd": 85,
+      "ai": 92,
+      "rng": 90
+    },
+    "wiki_long": "Su avatar digital cuenta con abanicos afilados que funcionan como bumeranes telequinéticos. Tiene la capacidad única de usar la Telequinesis para mover objetos del entorno digital con la mente.",
+    "seasons": "Temporadas 1 a 3.",
+    "outfits": "Kimono corto tradicional estilizado, maquillaje de geisha y moño alto.",
+    "weapon": "Abanicos tessen gemelos / Telequinesis."
+  },
+  {
+    "name": "YUMI V3",
+    "layout": "landscape",
+    "image": "wiki/yumiv3.png",
+    "version": "Incursión",
+    "hover_background": "wiki/sectordesierto.jpg",
+    "description": "Traje optimizado para la exploración de la red y el Mar Digital. Ofrece mayor aerodinámica y libertad de movimiento.",
+    "attributes": {
+      "spd": 95,
+      "ai": 94,
+      "rng": 95
+    },
+    "wiki_long": "Versión actualizada del código de Yumi compilada por Jeremie para hacer frente a la destrucción de los sectores. Mantiene sus habilidades base potenciando la velocidad de ataque y la defensa del núcleo.",
+    "seasons": "Temporada 4, Evolution.",
+    "outfits": "Mono ajustado de combate en tonos oscuros y granates con detalles de tecnología Lyoko.",
+    "weapon": "Abanicos digitales duales de alta frecuencia."
+  },
+  {
+    "name": "WILLIAM DUNBAR",
+    "layout": "poster",
+    "image": "wiki/william.png",
+    "version": "Base",
+    "hover_background": "wiki/kadicpasillo.jpg",
+    "description": "Estudiante rebelde y solitario recién llegado a Kadic. Su actitud atrevida y directa choca constantemente con Ulrich y capta la atención de Yumi.",
+    "attributes": {
+      "spd": 70,
+      "ai": 75,
+      "rng": 45
+    },
+    "wiki_long": "Tras demostrar su valía protegiendo al grupo en la Tierra en múltiples ocasiones, es seleccionado para convertirse en el sexto Guerrero Lyoko oficial, una decisión que cambiaría el destino de la guerra.",
+    "seasons": "Temporadas 2 a 4, Evolution.",
+    "outfits": "Chaqueta militar abierta, camiseta negra con logotipo urbano, vaqueros oscuros.",
+    "weapon": "Fuerza bruta / Determinación táctica."
+  },
+  {
+    "name": "WILLIAM V1",
+    "layout": "landscape",
+    "image": "wiki/williamv1.png",
+    "version": "Guerrero",
+    "hover_background": "wiki/sector5.jpg",
+    "description": "Avatar original de William al ser virtualizado por primera vez en Lyoko. Diseñado como un imponente guerrero pesado.",
+    "attributes": {
+      "spd": 65,
+      "ai": 80,
+      "rng": 50
+    },
+    "wiki_long": "Posee un espadón gigante capaz de desviar ráfagas de láseres y eliminar monstruos de un solo impacto. Desafortunadamente, debido a su exceso de confianza, fue atrapado por el Scyphozoa en su primera misión.",
+    "seasons": "Temporada 3 (Final).",
+    "outfits": "Traje de combate futurista blanco y azul turquesa con faja roja.",
+    "weapon": "Mandoble Lyoko de gran impacto."
+  },
+  {
+    "name": "WILLIAM V2",
+    "layout": "landscape",
+    "image": "wiki/williamv2.png",
+    "version": "X.A.N.A.",
+    "hover_background": "wiki/sectorhielo.jpg",
+    "description": "El guerrero definitivo bajo la posesión y control directo de X.A.N.A. Se convierte en la mayor amenaza para los Guerreros de Lyoko.",
+    "attributes": {
+      "spd": 90,
+      "ai": 98,
+      "rng": 85
+    },
+    "wiki_long": "Modificado con los poderes del superordenador malicioso. Puede disolverse en humo negro (Supra-humo), levitar, controlar monstruos y utilizar su espada para lanzar ondas expansivas de energía destructiva.",
+    "seasons": "Temporada 4.",
+    "outfits": "Armadura oscura corrupta con el Ojo de X.A.N.A. brillante en el pecho.",
+    "weapon": "Espada de X.A.N.A. / Habilidad Supra-humo / Levitación."
+  },
+  {
+    "name": "ULRICH V1",
+    "layout": "landscape",
+    "image": "wiki/Ulrichv1.webp",
+    "version": "Samurái",
+    "hover_background": "wiki/sectordelasmontañas.jpg",
+    "description": "Primera versión del código digital de Ulrich. Un diseño clásico optimizado para el combate cuerpo a cuerpo y la velocidad extrema en los sectores.",
+    "attributes": {
+      "spd": 90,
+      "ai": 82,
+      "rng": 50
+    },
+    "wiki_long": "Registro de batalla clásico. Utiliza sus técnicas de Supervelocidad para esquivar ráfagas de Megatanks e infiltrarse tras las líneas enemigas en las primeras fases de la guerra.",
+    "seasons": "Temporadas 1 a 3.",
+    "outfits": "Traje tradicional oriental amarillo y negro con cinta de guerrero en la frente.",
+    "weapon": "Sable katana digital."
+  },
+  {
+    "name": "ULRICH V2",
+    "layout": "poster",
+    "image": "wiki/Ulrichv2.webp",
+    "version": "Incursión",
+    "hover_background": "wiki/sectorbosque.jpg",
+    "description": "Actualización completa del avatar de Ulrich para la navegación por el Mar Digital, equipado con doble juego de sables cortantes.",
+    "attributes": {
+      "spd": 98,
+      "ai": 88,
+      "rng": 65
+    },
+    "wiki_long": "Código reprogramado que optimiza el uso del poder 'Triplicar' (creación de clones holográficos de combate) y aumenta los reflejos cinéticos durante los enfrentamientos contra William corrompido.",
+    "seasons": "Temporada 4, Evolution.",
+    "outfits": "Armadura elástica de combate en tonos marrones, amarillos y negros reflectantes.",
+    "weapon": "Sables gemelos cruzados de alta energía."
+  },
+
+  {
+  "name": "JIM MORALES (G.I. JIM)",
+  "layout": "poster",
+  "image": "wiki/jim-removebg-preview.png",
+  "version": "Fan-Made / Lyoko Form",
+  "hover_background": "wiki/sector5.jpg",
+  "description": "El profesor de gimnasia más estricto y enérgico de Kadic, adaptado a un entorno virtual. Su disciplina militar y condición física superior se traducen en un avatar diseñado para el combate cuerpo a cuerpo y la resistencia táctica.",
+  "attributes": {
+    "spd": 65,
+    "ai": 80,
+    "rng": 30
+  },
+  "wiki_long": "Inspirado por su formación como instructor, este avatar de Lyoko prioriza la defensa táctica y el uso de equipo de entrenamiento especializado. Aunque carece de armas de largo alcance, su capacidad para analizar el campo de batalla y resistir el daño lo convierten en un sólido apoyo para la vanguardia.",
+  "seasons": "Fan-Made",
+  "outfits": "Uniforme táctico bicolor (granate y gris) con diseño de instructor militar, diadema deportiva, dispositivo de comunicación integrado.",
+  "weapon": "Bastones de entrenamiento / Tácticas de defensa personal."
+},
+
+  {
+    "name": "AELITA SCHAFFER",
+    "layout": "poster",
+    "image": "wiki/aelita.webp",
+    "version": "Base",
+    "hover_background": "wiki/kadicpasillo.jpg",
+    "description": "Estudiante de intercambio en Kadic. Es amable, curiosa y posee una conexión profunda con el mundo virtual de Lyoko.",
+    "attributes": {
+      "spd": 85,
+      "ai": 90,
+      "rng": 75
+    },
+    "wiki_long": "La guardiana de Lyoko. Su capacidad para interactuar con los núcleos de datos le otorga un papel fundamental en la desactivación de torres y la protección de la humanidad contra X.A.N.A.",
+    "seasons": "Temporadas 1 a 4, Evolution.",
+    "outfits": "Vestido tipo jumper color granate, suéter rosa claro, botas altas a juego.",
+    "weapon": "Creación de entornos / Campos de energía."
+  },
+  {
+    "name": "AELITA V1",
+    "layout": "poster",
+    "image": "wiki/aelitav1.png",
+    "version": "Lyoko v1",
+    "hover_background": "wiki/sectordesierto.jpg",
+    "description": "Avatar original de Aelita en Lyoko. Diseñado con una estética élfica, enfocado en la agilidad y la exploración.",
+    "attributes": {
+      "spd": 90,
+      "ai": 85,
+      "rng": 40
+    },
+    "wiki_long": "La primera forma que tomó Aelita al materializarse en Lyoko. Aunque vulnerable, su diseño ligero le permite navegar por los sectores con gran velocidad.",
+    "seasons": "Temporada 1",
+    "outfits": "Conjunto amarillo y granate, estilo oriental con cintas, orejas puntiagudas.",
+    "weapon": "Agilidad táctica / Campos de energía básicos."
+  },
+  {
+    "name": "AELITA V2",
+    "layout": "poster",
+    "image": "wiki/aelitav2.webp",
+    "version": "Lyoko v2",
+    "hover_background": "wiki/sectorbosque.jpg",
+    "description": "Avatar actualizado de Aelita. Más aerodinámico y equipado para el combate activo en la red.",
+    "attributes": {
+      "spd": 95,
+      "ai": 95,
+      "rng": 85
+    },
+    "wiki_long": "La evolución definitiva del avatar de Aelita, que le otorga mayor potencia de fuego y la capacidad de vuelo, convirtiéndola en una combatiente de alto nivel.",
+    "seasons": "Temporadas 2 a 4",
+    "outfits": "Traje tecnológico de una pieza en tonos rosa, con alas translúcidas integradas.",
+    "weapon": "Campos de energía avanzados / Vuelo."
+  },
+  {
+    "name": "AVISPA",
+    "layout": "poster",
+    "image": "wiki/avispa.webp",
+    "version": "Monstruo de X.A.N.A.",
+    "hover_background": "wiki/sectordelasmontañas.jpg",
+    "description": "Una de las criaturas voladoras más ágiles y letales creadas por X.A.N.A. para patrullar los sectores.",
+    "attributes": {
+      "spd": 90,
+      "ai": 60,
+      "rng": 80
+    },
+    "wiki_long": "Su aguijón dispara proyectiles de energía concentrada. Su alta movilidad y capacidad para atacar en enjambres la hacen una amenaza constante para los Guerreros Lyoko.",
+    "seasons": "Temporadas 1 a 4",
+    "outfits": "Exoesqueleto orgánico-tecnológico de color amarillo con marcas de X.A.N.A.",
+    "weapon": "Aguijón de energía / Vuelo de alta velocidad."
+  },
+  {
+    "name": "JEREMY BELPOIS",
+    "layout": "poster",
+    "image": "wiki/jeremy.png",
+    "version": "Base",
+    "hover_background": "wiki/lab.jpg",
+    "description": "El cerebro del grupo. Genio de la informática que opera desde el laboratorio para guiar y proteger a sus amigos.",
+    "attributes": {
+      "spd": 40,
+      "ai": 100,
+      "rng": 20
+    },
+    "wiki_long": "Responsable de la supercomputadora y del mantenimiento de Lyoko. Aunque no lucha físicamente en el mundo virtual, su inteligencia es el arma más eficaz contra el sistema de X.A.N.A.",
+    "seasons": "Temporadas 1 a 4, Evolution.",
+    "outfits": "Jersey de cuello alto azul, pantalones casuales, gafas redondas.",
+    "weapon": "Programación / Análisis táctico."
+  },
+
+
+
+  {
+    "name": "TARÁNTULA",
+    "layout": "poster",
+    "image": "wiki/Tarantula.webp",
+    "version": "Monstruo de X.A.N.A.",
+    "hover_background": "wiki/sectordesierto.jpg",
+    "description": "Criatura cuadrúpeda de largo alcance diseñada por X.A.N.A. para el ataque táctico.",
+    "attributes": {
+      "spd": 75,
+      "ai": 65,
+      "rng": 95
+    },
+    "wiki_long": "Un monstruo altamente peligroso con gran movilidad que utiliza sus extremidades para disparar ráfagas precisas contra los Guerreros Lyoko.",
+    "seasons": "Temporadas 2 a 4",
+    "outfits": "Exoesqueleto mecánico de aspecto arácnido.",
+    "weapon": "Láseres de alta precisión."
+  },
+  {
+    "name": "ODD V1",
+    "layout": "poster",
+    "image": "wiki/oddv1.webp",
+    "version": "Lyoko v1",
+    "hover_background": "wiki/sectorbosque.jpg",
+    "description": "Avatar original de Odd, inspirado en una estética felina y ágil.",
+    "attributes": {
+      "spd": 90,
+      "ai": 60,
+      "rng": 70
+    },
+    "wiki_long": "El avatar de Odd en la primera temporada, caracterizado por su gran velocidad y capacidad de salto, ideal para la exploración rápida.",
+    "seasons": "Temporada 1",
+    "outfits": "Traje ajustado con diseño de gato morado y amarillo.",
+    "weapon": "Flechas láser."
+  },
+  {
+    "name": "MANTARALLA",
+    "layout": "landscape",
+    "image": "wiki/mantarallas.png",
+    "version": "Monstruo de X.A.N.A.",
+    "hover_background": "wiki/sector5v2.jpg",
+    "description": "Criatura acuática que patrulla el Mar Digital.",
+    "attributes": {
+      "spd": 85,
+      "ai": 75,
+      "rng": 80
+    },
+    "wiki_long": "Amenaza constante en el Mar Digital, capaz de absorber datos y controlar vehículos enemigos mediante tentáculos de conexión.",
+    "seasons": "Temporada 4",
+    "outfits": "Estructura orgánica en forma de manta raya.",
+    "weapon": "Descarga eléctrica / Control mental."
+  },
+  {
+    "name": "FRANZ HOPPER",
+    "layout": "poster",
+    "image": "wiki/franz.png",
+    "version": "Base",
+    "hover_background": "wiki/hermitav1.jpg",
+    "description": "El creador original de Lyoko que vive oculto en la red.",
+    "attributes": {
+      "spd": 30,
+      "ai": 100,
+      "rng": 50
+    },
+    "wiki_long": "Científico visionario que se sacrificó para crear Lyoko y proteger a su hija Aelita de X.A.N.A.",
+    "seasons": "Temporadas 1 a 4",
+    "outfits": "Bata de laboratorio blanca, jersey marrón, gafas.",
+    "weapon": "Conocimiento del sistema / Programación avanzada."
+  },
+  {
+    "name": "ODD DELLA ROBBIA",
+    "layout": "poster",
+    "image": "wiki/odd.png",
+    "version": "Base",
+    "hover_background": "wiki/kadicpasillo.jpg",
+    "description": "Estudiante creativo y bromista, incondicional de su perro Kiwi.",
+    "attributes": {
+      "spd": 95,
+      "ai": 70,
+      "rng": 85
+    },
+    "wiki_long": "Un miembro esencial de los Guerreros Lyoko, aportando optimismo y agilidad en las misiones más difíciles.",
+    "seasons": "Temporadas 1 a 4, Evolution.",
+    "outfits": "Camisa morada, pantalones de color oscuro, peinado crestado.",
+    "weapon": "Flechas láser / Agilidad sobrehumana."
+  },
+  {
+    "name": "NAVSKID XANA",
+    "layout": "landscape",
+    "image": "wiki/navskidv1.png",
+    "version": "Vehículo",
+    "hover_background": "wiki/mardigitalxana.jpg",
+    "description": "Pequeña nave de exploración del Skidbladnir para el Mar Digital. Creada por X.A.N.A ",
+    "attributes": {
+      "spd": 80,
+      "ai": 85,
+      "rng": 70
+    },
+    "wiki_long": "Diseñado por Jeremy para permitir a los Guerreros Lyoko moverse independientemente dentro de las burbujas virtuales del Mar Digital.",
+    "seasons": "Temporada 4",
+    "outfits": "Nave compacta de color oscuro y rojo.",
+    "weapon": "Torpedos láser."
+  },
+  {
+    "name": "NAVSKID",
+    "layout": "poster",
+    "image": "wiki/navskid.png",
+    "version": "Nave nodriza",
+    "hover_background": "wiki/mardigital.jpg",
+    "description": "La nave nodriza diseñada para viajar por el Mar Digital.",
+    "attributes": {
+      "spd": 60,
+      "ai": 95,
+      "rng": 90
+    },
+    "wiki_long": "El centro de operaciones móvil para las misiones en la red global, esencial para llegar a las réplicas de X.A.N.A.",
+    "seasons": "Temporada 4",
+    "outfits": "Diseño aerodinámico avanzado.",
+    "weapon": "Sistemas defensivos y cañones de energía."
+  },
+  {
+    "name": "MEGATANQUE",
+    "layout": "landscape",
+    "image": "wiki/megatanque.png",
+    "version": "Monstruo de X.A.N.A.",
+    "hover_background": "wiki/sectordelasmontañas.jpg",
+    "description": "Monstruo acorazado con forma de esfera.",
+    "attributes": {
+      "spd": 50,
+      "ai": 60,
+      "rng": 90
+    },
+    "wiki_long": "Un enemigo formidable que se desplaza rodando y dispara un láser continuo cuando abre su caparazón central.",
+    "seasons": "Temporadas 1 a 4",
+    "outfits": "Esfera metálica segmentada.",
+    "weapon": "Rayo láser de alta intensidad."
+  },
+  {
+    "name": "SISSY DELMAS",
+    "layout": "poster",
+    "image": "wiki/sissy.png",
+    "version": "Base",
+    "hover_background": "wiki/kadicpasillo.jpg",
+    "description": "La alumna más notoria y persistente de la Academia Kadic.",
+    "attributes": {
+      "spd": 60,
+      "ai": 50,
+      "rng": 30
+    },
+    "wiki_long": "Hija del director Delmas, siempre tratando de descubrir los secretos de Jeremy y sus amigos.",
+    "seasons": "Temporadas 1 a 4, Evolution.",
+    "outfits": "Camiseta rosa, vaqueros azules.",
+    "weapon": "Persistencia / Cotilleo."
+  },
+
+  {
+    "name": "NICHOLAS",
+    "layout": "poster",
+    "image": "wiki/nicholasjpg-removebg-preview.png",
+    "version": "Base",
+    "hover_background": "wiki/cafeteria.jpg",
+    "description": "Estudiante de Kadic y amigo cercano de Herb, a menudo involucrado en los planes de Sissy.",
+    "attributes": {
+      "spd": 50,
+      "ai": 45,
+      "rng": 30
+    },
+    "wiki_long": "Un personaje secundario que suele seguir a sus amigos en sus actividades escolares habituales.",
+    "seasons": "Temporadas 1 a 4",
+    "outfits": "Camisa roja abierta con camiseta gris debajo.",
+    "weapon": "N/A"
+  },
+  {
+    "name": "NICHOLAS",
+    "layout": "poster",
+    "image": "wiki/Nicholas-removebg-preview.png",
+    "version": "Alternativo",
+    "hover_background": "wiki/kadicpasillo.jpg",
+    "description": "Otra variante de la apariencia de Nicholas en la Academia Kadic.",
+    "attributes": {
+      "spd": 50,
+      "ai": 45,
+      "rng": 30
+    },
+    "wiki_long": "Nicholas es conocido por ser parte del grupo de amigos que frecuenta el patio de la academia.",
+    "seasons": "Temporadas 1 a 4",
+    "outfits": "Camiseta azul con el número 8.",
+    "weapon": "N/A"
+  },
+  {
+    "name": "GUSANO",
+    "layout": "poster",
+    "image": "wiki/Gusano.webp",
+    "version": "Monstruo de X.A.N.A.",
+    "hover_background": "wiki/sector5.jpg",
+    "description": "Un monstruo reptante de X.A.N.A. con extremidades largas y cuerpo segmentado.",
+    "attributes": {
+      "spd": 40,
+      "ai": 55,
+      "rng": 60
+    },
+    "wiki_long": "Criatura de Lyoko utilizada por X.A.N.A. para hostigar a los protagonistas en diversos sectores.",
+    "seasons": "Temporadas 1 a 4",
+    "outfits": "Estructura mecánica biológica alargada.",
+    "weapon": "Ataques físicos cuerpo a cuerpo."
+  }
+  
+]
+
+
+}
